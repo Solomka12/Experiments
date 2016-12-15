@@ -1,0 +1,45 @@
+<meta charset="utf-8">
+<script>
+
+function getRandomInt() {
+	return Math.floor(Math.random() * 20 + 1);
+}
+
+function getAnswer(num) {
+	return num & 1 ? '1' : '2';
+}
+
+do {
+
+	var question = getRandomInt()
+	var attempt = 0;
+	//alert(question);
+
+	do {
+
+		attempt++;
+		var answer, wrong = false;
+
+  		do {
+   	 		if(wrong) alert("Необходимо ввести только число от 1 до 20!");
+   	 		answer = parseInt(prompt( 'Player ' + getAnswer(attempt) + ', введите число:'));
+  	  		wrong = true;
+  		} while (isNaN(+answer) || answer <= 0 || answer > 20);
+
+		if (answer == question) {
+			alert('Поздравляем! Победил Player ' + getAnswer(attempt));
+			alert('Вы угадали с ' + attempt + '-й попытки');
+			break;
+		} else if (answer == question + 1 || answer == question - 1) {
+			alert('Почти угадал)');
+		} else {
+			alert('Неверно. Попробуйте еще.')
+		}
+
+	} while (answer != question);
+
+	var cont = confirm('Желаете продолжить?');
+
+} while (cont == true)
+
+</script>

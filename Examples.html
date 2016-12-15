@@ -1,0 +1,263 @@
+<meta charset="utf-8">
+<script>
+
+	//Функция проверки целое ли число
+function isInteger(num) {
+	//return (num ^ 0) === num; 				// Лучше не использовать, возникали проблемы
+	return Math.round(num) == num;
+}
+	//Функция проверки совпадения слова
+function findsMatchedText() {
+	var str = "Проверка";
+
+	if (~str.indexOf("верка")) { // Сочетание "if (~...indexOf)" читается как "если найдено"
+ 		alert( 'найдено!' );
+	}
+}
+
+	//Точная проверка на число
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+	//Последовательное использование тернарного оператора "?"
+function ternarGetAge() {
+	var age = prompt('возраст?', 18);
+
+	var message = (age < 3) ? 'Здравствуй, малыш!' :
+		(age < 18) ? 'Привет!' :
+		(age < 100) ? 'Здравствуйте!' :
+		'Какой необычный возраст!';
+
+	alert( message );
+}
+
+	//Использование Confirm 
+function usingConfirm() {
+	var isAdmin = confirm("Вы - администратор?");
+
+	alert( isAdmin );
+}
+
+	//Подсчет нечетных чисел
+function countOddNumber() {
+	for (var i = 0; i < 10; i++) {
+
+		if (i % 2 == 0) continue; // без continue будут выводится четные числа
+			alert(i);
+		}
+}
+
+	//Использование меток для break/continue
+function pointForBreakOrContinue() {
+	outer: for (var i = 0; i < 3; i++) {	// name:
+
+  		for (var j = 0; j < 3; j++) {
+
+    	var input = prompt('Значение в координатах '+i+','+j, '');
+
+   		// если отмена ввода или пустая строка -
+    	// завершить оба цикла
+    	if (!input) break outer;
+ 		}
+	}
+	alert('Готово!');
+}
+
+function naturalNamberCount(){
+	output: for (var i = 2; i < 10; i++) {
+		for (var j = 2; j < i; j++) {
+			if (i % j == 0) continue output;
+
+		}
+		alert(i); 
+	}
+}
+
+	//Пример использования switch
+function switchExample() {
+
+	var a = +prompt('a?', '');
+
+	switch (a) {
+		case 0:
+			alert( '0' );
+			break;
+
+		case 1:
+			alert( '1' );
+			break;
+
+		case 2:
+		case 3:
+			alert( '2,3' );
+			break;
+	}
+}
+
+	//Ф-ция получения n-ой степени числа x
+function getExponent(x, n) {
+
+	var z = x;
+
+	for (var i = 1; i < n; i++) {
+		z *= x;
+	}
+
+	return z;
+}
+
+	// вопрос на подтверждение question---------------------------------
+function ask(question, yes, no) {
+  if (confirm(question)) yes()
+  else no();
+}
+
+	// использование:
+// ask(
+//   "Вы согласны?",
+//   function() { alert("Вы согласились."); },
+//   function() { alert("Вы отменили выполнение."); }
+// );
+//---------------------------------------------------------------------
+
+
+	//создание функции полностью «на лету» из строки:
+/*
+var sum = new Function('a,b', ' return a+b; ');
+
+var result = sum(1, 2);
+alert( result ); // 3
+*/
+
+	//Пример рекурсии
+function pow(x) {
+  if (x != 1) { // пока n != 1, сводить вычисление pow(x) к pow(x-1)
+    return x * pow(x - 1);
+  } else {
+    return x;
+  }
+}	
+//alert( pow(+prompt('number:')) );
+
+	// Пример записи в html документ слова
+//document.write('xyzololo');
+
+
+	// Функция для вывода простых чисел до n
+function showPrimes(n) {
+  nextPrime: for (var i = 2; i < n; i++) {
+
+    for (var j = 2; j < i; j++) {
+      if (i % j == 0) continue nextPrime;
+    }
+
+    alert( i ); // простое
+  }
+}
+
+	//Формула Бине
+function fibBinet(n) {
+  var phi = (1 + Math.sqrt(5)) / 2;
+  // используем Math.round для округления до ближайшего целого
+  return Math.round(Math.pow(phi, n) / Math.sqrt(5));
+}
+
+// Пример простейшего объекта:
+
+var newObjectExample;
+
+newObjectExample = {
+	firstName: 'Ihor',
+	lastName: 'Solomakhin',
+	age: 21,
+	sex: 'Male',
+	fullName: function() {
+		return this.firstName + ' ' + this.lastName;
+	}
+};
+	//вызов:
+//alert(newObjectExample.fullName());
+
+
+/* Пример объявления объектов
+var user = {};
+user.name = 'Vasya';
+user.surname = 'Petrov';
+user.name = 'Edik'
+delete user.name;
+
+alert(user.name);
+alert(user.surname);
+*/
+
+	//Нахождение непрерывного подмассива arr, сумма элементов которого максимальна.
+function getMaxSubSum(arr) {
+  var maxSum = 0,
+    partialSum = 0;
+  for (var i = 0; i < arr.length; i++) {
+    partialSum += arr[i];
+    maxSum = Math.max(maxSum, partialSum);
+    if (partialSum < 0) partialSum = 0;
+  }
+  return maxSum;
+}
+/* Вызов:
+var arrey = [1, 2, 3, 4, 5];
+alert(getMaxSubSum(arrey));
+*/
+
+// Использование псевдо-массива аргументов функции
+function argumentsFunction() {
+  for (var i = 0; i < arguments.length; i++) {
+    alert( "Привет, " + arguments[i] );
+  }
+}
+// Вызов:
+//argumentsFunction("Винни", "Пятачок"); // 'Привет, Винни', 'Привет, Пятачок'
+
+/*--------------------------------------------------------------------------------------------*/
+/*          //Копирование свойств из одного или нескольких объектов в один объект
+var vasya = {
+  age: 21,
+  name: 'Вася',
+  surname: 'Петров'
+};
+
+var user = {
+  isAdmin: false,
+  isEmailConfirmed: true
+};
+
+var student = {
+  university: 'My university'
+};
+// добавить к vasya свойства из user и student
+copy(vasya, user, student);
+
+//Для создания копии объекта user:
+var userClone = copy({}, user);// скопирует все свойства в пустой объект
+*/
+/*--------------------------------------------------------------------------------------------*/
+
+/*                                //Аргументы функции поумолчанию
+function showWarning(width, height, title, contents) {
+  width = width || 200; // если не указана width, то width = 200
+  height = height || 100; // если нет height, то height = 100
+  title = title || "Предупреждение";
+}
+*/
+/*--------------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------------------*/
+
+/*                                    // Пример вывода Hello World!
+$=~[];$={___:++$,$$$$:(![]+"")[$],__$:++$,$_$_:(![]+"")[$],_$_:++$,$_$$:({}+"")[$],$$_$:($[$]+"")[$],_$$:++$,$$$_:(!""+"")[$],$__:++$,$_$:++$,$$__:({}+"")[$],$$_:++$,$$$:++$,$___:++$,$__$:++$};$.$_=($.$_=$+"")[$.$_$]+($._$=$.$_[$.__$])+($.$$=($.$+"")[$.__$])+((!$)+"")[$._$$]+($.__=$.$_[$.$$_])+($.$=(!""+"")[$.__$])+($._=(!""+"")[$._$_])+$.$_[$.$_$]+$.__+$._$+$.$;$.$$=$.$+(!""+"")[$._$$]+$.__+$._+$.$+$.$$;$.$=($.___)[$.$_][$.$_];$.$($.$($.$$+"\""+$.$$_$+$._$+$.$$__+$._+"\\"+$.__$+$.$_$+$.$_$+$.$$$_+"\\"+$.__$+$.$_$+$.$$_+$.__+".\\"+$.__$+$.$$_+$.$$$+"\\"+$.__$+$.$$_+$._$_+"\\"+$.__$+$.$_$+$.__$+$.__+$.$$$_+"(\\\"\\"+$.__$+$.__$+$.___+$.$$$_+(![]+"")[$._$_]+(![]+"")[$._$_]+$._$+", \\"+$.__$+$.$$_+$.$$$+$._$+"\\"+$.__$+$.$$_+$._$_+(![]+"")[$._$_]+$.$$_$+"!\\\")\\"+$.$$$+$._$$+"\"")())();
+*/
+/*--------------------------------------------------------------------------------------------*/
+
+
+
+
+</script>
+

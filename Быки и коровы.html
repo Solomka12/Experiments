@@ -1,0 +1,85 @@
+<meta charset="utf-8">
+<script>
+
+function getRandomInt() {
+	return Math.floor(Math.random() * (9 + 1));
+
+}
+	
+function checkArrey(arr) {
+	for (var i = 0; i < arr.length; i++) {
+		var e = 0;
+		for ( e = 0; e < arr.length; e++) {
+			if (i == e) continue;
+			if (arr[i] == arr[e] || arr[0] == 0 || isNaN(arr[i])) return true;
+		}
+	}
+	return false;
+}
+
+function comparePlayerArrVsCompArr(playerArr, compArr) {
+
+	for (var i = 0; i < playerArr.length; i++) {
+		
+		if (playerArr[i] == compArr[0] ||
+			playerArr[i] == compArr[1] ||
+			playerArr[i] == compArr[2] ||
+			playerArr[i] == compArr[3]) {
+		 
+			if (playerArr[i] == compArr[i]) {
+				bulls++;
+			} else {
+				cows++;
+			}
+		}
+	}
+}
+
+do {
+
+	do {
+
+		var comp = [getRandomInt(), getRandomInt(), getRandomInt(), getRandomInt()];
+
+	} while (checkArrey(comp));
+
+	document.write('Right answer:' + comp);
+
+	var tries = 0;
+
+	do {
+
+		var bulls = 0;
+		var cows = 0;
+
+		do {
+
+			var enterPlayerNum = prompt("Введите последовательность вида: хххх");
+
+			var player = [+enterPlayerNum.slice(0, 1), 
+						  +enterPlayerNum.slice(1, 2), 
+						  +enterPlayerNum.slice(2, 3),
+						  +enterPlayerNum.slice(3, 4)];
+
+
+			if (checkArrey(player)) {
+				alert('Необходимо вводить только числа от 0 до 9. 0 не должен быть первым и числа не должны повторяться.');
+			}
+
+		} while (checkArrey(player));
+
+		comparePlayerArrVsCompArr(player, comp);
+
+		tries++;
+
+		document.write('<br/><br/>' + tries + '-я попытка.');
+		document.write('<br/>Коров: ' + cows + ' Быков: ' + bulls);
+		document.write('<br/>Вы ввели: ' + player);
+
+	} while (bulls < 4);
+
+	alert('You win!');
+
+} while (confirm('Continue?'));
+
+</script>

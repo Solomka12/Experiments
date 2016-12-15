@@ -1,0 +1,109 @@
+<meta charset="utf-8">
+<script>
+
+function getRandomInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getCard() {
+	var cards = ['2', '3', '4', '5','6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+	return cards[getRandomInt(0, cards.length - 1)];
+}
+
+function getSum(hand) {
+	var sum=0;
+
+	for(var i = 0; i < hand.length; i++) {
+		if (hand[i] != 'A') {
+    		if ( hand[i] == 'J'|| hand[i] == 'Q' || hand[i] == 'K') {
+    			sum = sum + 10;
+    		} else {
+    			sum = sum + parseInt(hand[i]);
+    		}
+    	}
+    }
+
+    for(var i = 0; i < hand.length; i++) {
+		if (hand[i] == 'A') {
+    		if (sum > 10) {
+    			sum = sum + 1;
+    		} else {
+    			sum = sum + 11;
+    		}
+    	}
+    }
+
+	return sum;
+}
+
+function getStatus() {
+	return "Дилер: " + dealer.join(' ') + " Игрок: " + player.join(' ') + '.';
+}
+
+var cash = 100;
+
+do {
+
+	var bet, wrong = false;
+  	do {
+    	if(wrong) alert("Необходимо ввести только число от 1 до " + cash);
+    		bet = parseInt(prompt('Ваша ставка от 1 до ' + cash , '10'));
+
+    	wrong = true;
+  	} while (isNaN(+bet) || bet <= 0 || bet > cash);
+
+	cash = cash - bet;
+
+	var dealer = [getCard()];
+	var player = [getCard(), getCard()];
+
+	if (getSum(player) == 21) {
+		alert('Black Jack!' + getStatus());
+		cash = cash + (bet * 2);
+	} else {
+		
+		do  {
+			var answer = confirm(getStatus() + ' Хотите еще карту?')
+			if (answer) {
+				player.push(getCard());
+			
+				alert(getStatus());
+
+				if (getSum(player) == 21) {
+					alert(getSum(player));
+					alert('You win!');
+					cash = cash + (bet * 2);;
+					break;
+				} else if (getSum(player) > 21) {
+					alert(getSum(player));
+					alert('You lose :(');
+					break;
+				}
+			} else {
+
+				while (getSum(dealer) < 17) {
+					dealer.push(getCard());
+				}
+
+				var sumDealer = getSum(dealer);
+				var sumPlayer = getSum(player);
+
+				if (sumDealer == sumPlayer) {
+					alert('Ничья ' + getStatus());
+					cash = parseInt(cash) + parseInt(bet);
+				} else if (sumPlayer > sumDealer || sumDealer > 21) {
+					alert('Выигрыш! ' + getStatus());
+					cash = cash + (bet * 2);
+				} else {
+					alert('Проигрыш :( ' + getStatus());
+				}
+			}
+		} while (answer);
+	}
+
+	alert('На вашем счету ' + cash + '$ ');
+} while (cash > 0);
+
+alert('Game over');
+
+</script>
