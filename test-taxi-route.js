@@ -1,4 +1,4 @@
-export default [{'lon': 2.0737866, 'msg': "('wandering - headed to', <cities.Point object at 0x7fef22dffba8>, 'in ~5s')", 'time': 0, 'name': 'taxi#00', 'lat': 41.3790511},
+let arr = [{'lon': 2.0737866, 'msg': "('wandering - headed to', <cities.Point object at 0x7fef22dffba8>, 'in ~5s')", 'time': 0, 'name': 'taxi#00', 'lat': 41.3790511},
 {'lon': 2.0737866, 'msg': "('wandered',)", 'time': 5.580452044204565, 'name': 'taxi#00', 'lat': 41.3790511},
 {'lon': 2.0737866, 'msg': "('wandering - headed to', <cities.Point object at 0x7fef22dffef0>, 'in ~2s')", 'time': 5.580452044204565, 'name': 'taxi#00', 'lat': 41.3790511},
 {'lon': 2.0733929, 'msg': "('wandered',)", 'time': 7.786941987915678, 'name': 'taxi#00', 'lat': 41.379095},
@@ -694,3 +694,4 @@ export default [{'lon': 2.0737866, 'msg': "('wandering - headed to', <cities.Poi
 {'lon': 2.1743542, 'msg': "('wandering - headed to', <cities.Point object at 0x7fef22dffe80>, 'in ~7s')", 'time': 990.5204555310614, 'name': 'taxi#00', 'lat': 41.3938667},
 {'lon': 2.1743542, 'msg': "('wandered',)", 'time': 997.0393106093948, 'name': 'taxi#00', 'lat': 41.3938667},
 {'lon': 2.1743542, 'msg': "('wandering - headed to', <cities.Point object at 0x7fef22dffcc0>, 'in ~7s')", 'time': 997.0393106093948, 'name': 'taxi#00', 'lat': 41.3938667}]
+export default arr;
